@@ -1,14 +1,13 @@
 #initial
-geo_em_flnm        = "/mnt/data/wrf/WPS-4.2/china/geo_em.d01.nc"
-wrfinput_flnm      = "/mnt/data/wrf/WPS-4.2/china/wrfinput_d01"
-# wrfinput_WRF = '/mnt/data/wrf/wrfchem/wrf-cn-test1/test/em_real/wrfinput_d01'
+geo_em_flnm        = "geo_em.d01.nc"
+wrfinput_flnm      = "wrfinput_d01"
 ds1 = xr.open_dataset(wrfinput_flnm)
-# dsw = xr.open_dataset(wrfinput_WRF)
+
 
 lat = ds1.XLAT[0,:,1].data
 lon = ds1.XLONG[0,1,:].data
 
-f2 = '/mnt/data/wrf/noahmpcn_2d/hydrocn/LandModel/Run/data_download/GLDAS_NOAH025_3H.A20220101.0000.021.nc4'
+f2 = '/Run/data_download/GLDAS_NOAH025_3H.A20220101.0000.021.nc4'
 ds2 = xr.open_dataset(f2)
 ds2 = ds2.interp(lat = lat,lon = lon,method='nearest')
 
@@ -80,11 +79,4 @@ p1 = p1.assign_attrs(TITLE="OUTPUT FROM CONSOLIDATE_GRIB v20150518",missing_valu
                         TRUELAT1=40.0,TRUELAT2=-999.9,LA1=35.0,LO1=115.0,STAND_LON=-999.9,\
                           MAP_PROJ=3.,MMINLU='MODIFIED_IGBP_MODIS_NOAH')
 
-# p1.attrs = dss1.attrs
-
-# Optionally, if you want to copy attributes for each variable as well:
-for var in p1.variables:
-    if var in dss1.variables:
-        p1[var].attrs = dss1[var].attrs
-
-p1.to_netcdf('/mnt/data/wrf/offline_noahmp/HRLDAS-v3.6/Run/indir/2010010100.LDASIN_DOMAIN1')
+p1.to_netcdf('/HRLDAS-v3.6/Run/indir/2010010100.LDASIN_DOMAIN1')
