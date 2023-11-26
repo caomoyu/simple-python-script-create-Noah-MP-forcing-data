@@ -5,7 +5,7 @@ path = glob.glob('/data_download/GLDAS_NOAH025_3H.A2022*')
 path_new = sorted(path, key = os.path.getctime)
 for i in path_new:
     
-    if os.path.exists('/mnt/data/wrf/offline_noahmp/HRLDAS-v3.6/Run/indir/'+i[80:88]+i[89:91]+'.LDASIN_DOMAIN1'):
+    if os.path.exists('/HRLDAS-v3.6/Run/indir/'+i[80:88]+i[89:91]+'.LDASIN_DOMAIN1'):
         pass
     else:
         ds2 = xr.open_dataset(i)
@@ -40,7 +40,7 @@ for i in path_new:
                             DX=30000.0,DY=30000.0,\
                                 TRUELAT1=40.0,TRUELAT2=-999.9,LA1=35.0,LO1=115.0,STAND_LON=-999.9,\
                                 MAP_PROJ=3.,MMINLU='MODIFIED_IGBP_MODIS_NOAH')
-        p1.to_netcdf('/mnt/data/wrf/offline_noahmp/HRLDAS-v3.6/Run/indir/'+'2020'+i[84:88]+i[89:91]+'.LDASIN_DOMAIN1')
+        p1.to_netcdf('/HRLDAS-v3.6/Run/indir/'+'2020'+i[84:88]+i[89:91]+'.LDASIN_DOMAIN1')
 
 
 
